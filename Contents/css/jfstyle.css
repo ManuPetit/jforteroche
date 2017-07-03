@@ -1,0 +1,351 @@
+/* 
+        Site fonts
+*/
+@font-face {
+    font-family: 'BreeSerif';
+    src: url('../fonts/BreeSerif-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'ReenieBeanie';
+    src: url('../fonts/ReenieBeanie.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'JosefinSans';
+    src: url('../fonts/JosefinSans-Light.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'JosefinSans';
+    src: url('../fonts/JosefinSans-LightItalic.ttf') format('truetype');
+    font-style: italic;
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'JosefinSans';
+    src: url('../fonts/JosefinSans-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'JosefinSans';
+    src: url('../fonts/JosefinSans-Italic.ttf') format('truetype');
+    font-style: italic;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'JosefinSans';
+    src: url('../fonts/JosefinSans-Bold.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 700;
+}
+@font-face {
+    font-family: 'JosefinSans';
+    src: url('../fonts/JosefinSans-BoldItalic.ttf') format('truetype');
+    font-style: italic;
+    font-weight: 700;
+}
+/*
+        Global settings
+*/
+body {
+    font-family: JosefinSans, Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    padding: 0;
+    margin: 0;
+    background-color: #cee0ed;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+h1, h3 {
+    font-family: 'BreeSerif', 'Times New Roman', Times, serif;
+}
+a {
+    color: #336b87;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+}
+a:hover {
+    color: #be7203;
+}
+/*
+        Header section
+*/
+header {
+    background: #2a3132;
+    color: #ffffff;
+    padding-top: 20px;
+    min-height: 70px;
+    border-bottom: #e8a735 3px solid;
+}
+header a {
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1em;
+}
+header li {
+    float: left;
+    display: inline;
+    padding: 0 10px;
+}
+header #branding {
+    float: left;
+}
+header #branding h1 {
+    font-family: 'ReenieBeanie', cursive, sans-serif;
+    font-size: 2.5em;
+    margin: 0;
+}
+header nav {
+    float: right;
+    margin-top: 20px;
+}
+header .highlight, header .current a {
+    color: #e8a735;
+}
+header .current a {
+    font-weight: bold;
+}
+header a:hover {
+    color: #be7203;
+}
+/*
+        Cover section
+*/
+#cover {
+    min-height: 400px;
+    background: url('../img/alaska-cover-2144x1424.jpg') no-repeat 0 -700px;
+    text-align: center;
+    color: #ffffff;
+}
+#cover h1 {
+    margin-top: 100px;
+    font-size: 3.2em;
+    letter-spacing: .2em;
+}
+#cover p {
+    font-size: 1.5em;
+}
+/*
+        Intro section
+*/
+#intro {
+    padding: 15px;
+    color: #ffffff;
+    background: #2a3132;
+}
+#intro p {
+    font-size: 1.2em;
+}
+#intro .signature {
+    text-align: right;
+    font-family: 'ReenieBeanie', cursive, sans-serif;
+    font-size: 1.5em;
+}
+#intro h1 {
+    text-align: center;
+    font-size: 2em;
+    letter-spacing: 0.1em;
+}
+/*
+        Boxes section
+*/
+#boxes {
+    margin-top: 20px;
+}
+#boxes h1 {
+    font-size: 2em;
+    text-align: center;
+}
+#boxes .box {
+    width: 30%;
+    float: left;
+    padding: 15px;
+}
+#boxes h3 {
+    letter-spacing: 0.05em;
+    text-align: center;
+} 
+#boxes h4 {
+    text-align: right;
+}
+/*
+        Sidebar section
+*/
+aside#sidebar {
+    float: left;
+    width: 30%;
+    margin-top: 10px;
+}
+aside#sidebar p {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+aside#sidebar .current a {
+    color: #be7203;
+}
+aside#sidebar a:hover {
+    color: #e8a735;
+}
+aside hr {
+    display: none;
+}
+/*
+        Main-col section
+*/
+article#main-col {
+    float: right;
+    width: 65%;
+}
+article h1 {
+    font-size: 1.8em;
+    letter-spacing: 0.1em;
+}
+/*
+        Comment section
+*/
+.comment {
+    padding: 10px;
+    border: #336b87 solid 1px;
+    margin-bottom: 6px;
+    background: #acd3ec;
+}
+.level1 {
+    margin-left: 50px;
+}
+.level2 {
+    margin-left: 100px;
+}
+.comment a {
+    font-size: 1.5em;
+    padding: 0 10px;
+}
+.comment-icon {
+    text-align: right;
+}
+.pseudo {
+    font-weight: bold;
+    font-style: italic;
+}
+/*
+        Biographie section
+*/
+ul#bio li {
+    list-style: none;
+    padding: 10px;
+    border: #336b87 solid 1px;
+    margin-bottom: 6px;
+    background: #acd3ec;
+}
+ul#bio img {
+    float: right;
+    width: 100px;
+}
+/*
+        Connexion & comment form
+*/
+.connexion {
+    text-align: center;
+}
+.login {
+    margin-top: 15px;
+}
+.login input {
+    padding: 4px;
+    height: 25px;
+    width: 240px;
+    margin-bottom: 20px;
+}
+.message input {
+    padding: 4px;
+    height: 25px;
+    width: 330px;
+    margin-bottom: 20px;
+}
+.message textarea {
+    width: 330px;
+}
+.button-submit {
+    margin-top: 20px;
+    height: 36px;
+    background: #e8a735;
+    border: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #2a3132;    
+}
+.button-submit:hover {
+    color: #ffffff;
+    cursor: pointer;
+    background: #cf713b;
+}
+.button-submit:active {
+    background: #bd713b;
+    color: #ffffff;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+/*
+        Footer section
+*/
+footer {
+    padding: 20px;
+    margin-top: 20px;
+    color: #2a3132;
+    background-color: #e8a735;
+    text-align: center;
+}
+/*
+        Media queries
+*/
+@media (max-width: 768px){
+    header #branding,
+    header nav,
+    header nav li,
+    #boxes .box,
+    article#main-col,
+    aside#sidebar {
+        float: none;
+        text-align: center;
+        width: 100%;
+    }
+    header {
+        padding-bottom: 20px;
+    }
+    #cover {
+        background: url('../img/alaska-cover-768x372.jpg') no-repeat;
+        min-height: 300px;
+    }
+    #cover h1{
+        margin-top: 30px;
+        font-size: 2.2em;
+        letter-spacing: 0.1em;
+    }
+    #cover p {
+        font-size: 1.3em;
+    }
+    #boxes h4 {
+        text-align: center;
+    }
+    aside hr {
+        display: block;
+        width: 100%;
+        margin: 20px 0;
+    }
+    .button-submit,
+    .message input,
+    .message textarea,
+    .login input {
+        width: 90%;
+    }
+}
