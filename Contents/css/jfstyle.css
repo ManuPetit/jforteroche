@@ -78,6 +78,11 @@ a {
 a:hover {
     color: #be7203;
 }
+.error {
+    font-size: 1em;
+    color: #e60000;
+    font-weight: bold;
+}
 /*
         Header section
 */
@@ -249,8 +254,9 @@ ul#bio li {
     background: #acd3ec;
 }
 ul#bio img {
-    float: right;
-    width: 100px;
+    float: left;
+    margin: 10px 25px 20px 10px;
+    width: 150px;
 }
 /*
         Connexion & comment form
@@ -271,7 +277,7 @@ ul#bio img {
     padding: 4px;
     height: 25px;
     width: 330px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 .message textarea {
     width: 330px;

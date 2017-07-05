@@ -3,16 +3,16 @@
 require_once 'Configuration.php';
 
 /**
- * Classe Modele permet l'accès à la base de données
+ *          Access to the database Class
  */
 abstract class Model {
 
-    // Objet PDO accès à la base de données
+    //  PDO Object
     private static $db;
 
     /**
-     * Retourne l'objet de connexion tout en l'initialisant
-     * @return PDO objet connexion à la base de donnée
+     * Get the PDO object and initialise the connection
+     * @return PDO objet connection to the DB
      */
     private function getDB() {
         if (self::$db === null) {
@@ -32,16 +32,16 @@ abstract class Model {
     }
 
     /**
-     * Fin de la classe PDO
+     *  End of PDO connection
      */
     protected function close() {
         self::$db = NULL;
     }
 
     /**
-     * Permet l'éxécution d'une requête ou d'une procédure stockée
-     * @param string $sql : la requête
-     * @param array $params : les paramètres de la requête
+     * Execute a query or stored procedure
+     * @param string $sql   SQL query
+     * @param array $params Parameters of the query
      */
     protected function execute($query, $params = null) {
         try {

@@ -2,6 +2,11 @@
 
 require_once 'Configuration.php';
 
+/**
+ * 
+ *                                                  Main MENU dans generate
+ * 
+ */
 class View {
 
     //name of the file associated to a view
@@ -15,7 +20,7 @@ class View {
 
     //defines the name of the view depending of the action
     public function __construct($request, $action, $controller = "") {
-        $file = "View/";
+        $file = "Views/";
         if ($controller != "") {
             $file = $file . $controller . "/";
         }
@@ -33,7 +38,7 @@ class View {
         $webRoot = Configuration::getSetting("webRoot", "/");
         $mainMenu = $this->createMainMenu();
         //generates the template with the specific part of the view
-        $view = $this->generateFile('View/template.php', array('title' => $this->title, 'content_for_layout' => $content,
+        $view = $this->generateFile('Views/template.php', array('title' => $this->title, 'content_for_layout' => $content,
             'webRoot' => $webRoot, 'mainMenu' => $mainMenu));
         //send view to browser
         echo $view;
@@ -119,5 +124,5 @@ class View {
     private function sanitizeHtml($value) {
         return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
     }
-
+    
 }

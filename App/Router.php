@@ -5,11 +5,14 @@ require_once 'View.php';
 
 class Router {
 
+    private $request;
+
     //routing of a request
     public function RouterRequest() {
         try {
             //merge parametres from both GET and POST
             $request = new Request(array_merge($_GET, $_POST));
+            $this->request = $request;
             $controller = $this->createController($request);
             $action = $this->createAction($request);
             $controller->doAction($action);
@@ -29,7 +32,7 @@ class Router {
         }
         //creating the name of the file
         $controllerClass = "Controller" . $controller;
-        $controllerFile = "Controller/"  . $controllerClass . ".php";
+        $controllerFile = "Controllers/" . $controllerClass . ".php";
         if (file_exists($controllerFile)) {
             require($controllerFile);
             $controller = new $controllerClass();
@@ -43,8 +46,8 @@ class Router {
     //create appropriate action according to request
     private function createAction(Request $request) {
         //default action
-        $action = "index"; 
-        if ($request->parameterExists('action')){
+        $action = "index";
+        if ($request->parameterExists('action')) {
             $action = $request->getParameter('action');
         }
         return $action;
@@ -52,7 +55,7 @@ class Router {
 
     //show an error
     private function showError(Exception $exception) {
-        $view = new View("erreur");
+        $view = new View($this->request, "erreur");
         $view->generate(array('errorMsg' => $exception->getMessage()));
     }
 
