@@ -7,7 +7,7 @@ class Configuration {
 
     private static $settings;
 
-    public static function getSetting($name, $defaultValue = null) {
+    public static function getSetting(string $name, $defaultValue = null) {
         if (isset(self::getSettings()[$name])) {
             $value = self::getSettings()[$name];
         } else {

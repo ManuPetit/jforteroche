@@ -12,7 +12,9 @@
         <header>
             <div class="container">
                 <div id="branding">
-                    <h1>Jean <span class="highlight">Forteroche</span></h1>
+                    <a href="Accueil" title="Page d'accueil">
+                        Jean <span class="highlight">Forteroche</span>
+                    </a>
                 </div>
                 <nav>
                     <ul>
@@ -22,10 +24,13 @@
             </div>
         </header>
         <div id="content"> 
-            <?php echo $content_for_layout; ?> <!-- Specific content -->
-        </div> <!-- #content -->
+            <!-- Specific content -->
+            <?php echo $content_for_layout; ?> 
+            <!-- End of specific content -->
+        </div> 
         <footer>
             <p>Auteur : Jean Forteroche | Réalisation du site webcom Copyright &copy; 2017</p>
         </footer>
+        <script src="../Contents/js/jfjavascripts.js"></script>
     </body>
 </html>

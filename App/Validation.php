@@ -31,7 +31,7 @@ class Validation {
      * @param string $input     The value to check
      */
     public function isRequired($inputName, $input){
-        if ($input == '') {
+        if (trim($input) == '') {
             $this->errors['err_' . $inputName] = "vous devez entrer une valeur dans ce champs.";
         }
     }
@@ -62,14 +62,48 @@ class Validation {
     }
     
     /**
+     * cleanup text and check that it is of the right size
+     * 
+     * @param string $inputName The name of the input the value comes from
+     * @param string $input     The value to check
+     * @param int $minSize      The minimum size: 3 is the default
+     * @param int $maxSize      The maximum size or 0 for very long text
+     * @return string           return cleanup text
+     */
+    public function cleanUpText($inputName, $input, $minSize = 3, $maxSize = 0) {
+        $input = trim($input);
+        if (strlen($input) < $minSize) {
+            $this->errors['err_' . $inputName] = "minimum $minSize charactères";
+        }
+        if (strlen($input) > $maxSize){
+            $this->errors['err_' . $inputName] = "maximum $maxSize charactères";
+        }
+        //clean up text
+        return $this->cleanUpTextBlock($input);
+    }
+
+    /**
      * Ensure the text block does not include anyy malicious tags
      * 
      * @param string $input The value to check
      * @return string       The cleaned value    
      */
     public function cleanUpTextBlock($input) {
-        return strip_tags(html_entity_decode($input));
-        
+        return strip_tags(html_entity_decode($input));        
+    }
+    
+    /**
+     * Method to allow only certains tags in tinymce
+     * 
+     * @param string $input The value to check
+     * @return string       The cleaned value 
+     */
+    public function cleanUpTinyMce($input){
+        $input = trim($input);
+        $allowedTags = '<p><strong><em><u><h1><h2><h3><h4><h5><h6>';
+        $allowedTags .= '<li><ol><ul><span><div><br><ins><del>';
+        return strip_tags(stripcslashes($input), $allowedTags);
+        //return strip_tags($input, $allowedTags);
     }
 
 }

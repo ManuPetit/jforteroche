@@ -2,7 +2,6 @@
 
 require_once 'App/Controller.php';
 require_once 'App/Forms.php';
-;
 require_once 'App/Validation.php';
 require_once 'Models/Chapitre.php';
 require_once 'Models/Commentaire.php';
@@ -30,18 +29,35 @@ class ControllerChapitre extends Controller {
      */
     public function index() {
         $forms = new Forms();
-        $idChapter = $this->request->getParameter("id");
-        $this->chapter->getChapter($idChapter);
-        $menu = $this->chapter->getChapterList();
-        $comments = $this->comment->getApprovedCommentsChapter($idChapter);
-        $this->generateView(array(
-            'menu' => $menu,
-            'chapter' => $this->chapter,
-            'comments' => $comments,
-            'forms' => $forms,
-            'value' => null,
-            'errors' => null
-        ));
+        //check if we have at least one chapter published
+        $idChapter = $this->chapter->getFirstPublishedChapterId();
+        //check if we have an idea passed by the request
+        //and override idChapter
+        if ($this->request->parameterExists('id')) {
+            $idChapter = $this->request->getParameter('id');
+        }
+        if (isset($idChapter) && $idChapter != '') {
+            $this->chapter->getPublishedChapter($idChapter);
+            $menu = $this->chapter->getChapterList();
+            $comments = $this->comment->getApprovedCommentsChapter($idChapter);
+            $this->generateView(array(
+                'menu' => $menu,
+                'chapter' => $this->chapter,
+                'comments' => $comments,
+                'forms' => $forms,
+                'value' => null,
+                'errors' => null
+            ));
+        } else {
+            $this->generateView(array(
+                'menu' => null,
+                'chapter' => null,
+                'comments' => null,
+                'forms' => null,
+                'value' => null,
+                'errors' => null
+            ));
+        }
     }
 
     /**
@@ -55,14 +71,14 @@ class ControllerChapitre extends Controller {
         //first we validate the author input
         $validation = new Validation();
         $validation->isRequired('author', $author);
-        $validation->isAlphaNumInputOk('author', $author, 3);
+        $validation->isAlphaNumInputOk('author', $author, 3, 80);
         //then we validate the comment and clean it up
         $validation->isRequired('comment', $comment);
         $comment = $validation->cleanUpTextBlock($comment);
         //retrieve errors
         $errors = $validation->getErrors();
         //get the data to either refresh the page or show the page with errors
-        $this->chapter->getChapter($idChapter);
+        $this->chapter->getPublishedChapter($idChapter);
         $menu = $this->chapter->getChapterList();
         $comments = $this->comment->getApprovedCommentsChapter($idChapter);
         if (isset($errors) && $errors != null) {
@@ -90,6 +106,16 @@ class ControllerChapitre extends Controller {
                 'errors' => null,
                 'message' => $info), 'index');
         }
+    }
+
+    /**
+     * This function signals a comment and hides it (as well as the comments which
+     * may be linked to it)
+     */
+    public function signaler() {
+        $idComment = $this->request->getParameter("id");
+        $idChapter = $this->comment->signalComment($idComment);
+        $this->redirect("chapitre", "index", $idChapter);
     }
 
 }

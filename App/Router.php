@@ -11,7 +11,13 @@ class Router {
     public function RouterRequest() {
         try {
             //merge parametres from both GET and POST
-            $request = new Request(array_merge($_GET, $_POST));
+            if (isset($_GET['params']) && $_GET['params'] != '') {
+                $params = array();
+                $params = $this->parseParameters($_GET['params']);
+                $request = new Request(array_merge($_GET, $params));
+            } else {
+                $request = new Request(array_merge($_GET, $_POST));
+            }
             $this->request = $request;
             $controller = $this->createController($request);
             $action = $this->createAction($request);
@@ -57,6 +63,21 @@ class Router {
     private function showError(Exception $exception) {
         $view = new View($this->request, "erreur");
         $view->generate(array('errorMsg' => $exception->getMessage()));
+    }
+
+    //Parse parameters
+    private function parseParameters($params) {
+        try {
+            $allParams = array();
+            $allParams = explode('/', filter_var(rtrim($params, '/')), FILTER_SANITIZE_URL);
+            $endParams = array();
+            for ($i = 0; $i < count($allParams); $i += 2) {
+                $endParams[$allParams[$i]] = $allParams[$i + 1];
+            }
+            return $endParams;
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
     }
 
 }

@@ -65,7 +65,14 @@ abstract class Model {
         try {
             $handler = self::getDB();
             $statement = $handler->prepare($query);
-            $statement->execute($params);
+            if (isset($params[0]['name']) && $params[0]['name'] != '') {
+                foreach ($params as $param) {
+                    $statement->bindParam($param['name'], $param['value'], $param['type']);
+                }
+                $statement->execute();
+            } else {
+                $statement->execute($params);
+            }
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
             throw new Exception($ex->getMessage());

@@ -20,7 +20,7 @@
                     <h3><?php echo $this->sanitizeHtml($chapter->getTitle()); ?></h3>
                     <h4>par <?php echo $this->sanitizeHtml($chapter->getUserName()); ?></h4>
                     <p>
-                        <?php echo $this->sanitizeHtml($chapter->getContent()); ?></p>
+                        <?php echo $chapter->getContent(); ?></p>
                     <p>Publié le <?php echo $chapter->getDateLastModif(); ?>.<p>
                     <p>
                         <a href="chapitre/index/<?php echo $this->sanitizeHtml($chapter->getId()); ?>">Lire la suite</a>                          
@@ -28,7 +28,8 @@
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <h1>Aucun chapitre publié...</h1>
+            <h1>Aucun chapitre publié.</h1>
+            <h3>Revenez bientôt pour découvrir le livre....</h3>
         <?php endif; ?>
     </div>
 </section>

@@ -7,11 +7,22 @@
 <section id="main">
     <div class="container">
         <article> 
-            <p>Ac ne quis a nobis hoc ita dici forte miretur, quod alia quaedam in hoc facultas sit ingeni, neque haec dicendi ratio aut disciplina, ne nos quidem huic uni studio penitus umquam dediti fuimus. Etenim omnes artes, quae ad humanitatem pertinent, habent quoddam commune vinculum, et quasi cognatione quadam inter se continentur.</p>
-            <p>Dein Syria per speciosam interpatet diffusa planitiem. hanc nobilitat Antiochia, mundo cognita civitas, cui non certaverit alia advecticiis ita adfluere copiis et internis, et Laodicia et Apamia itidemque Seleucia iam inde a primis auspiciis florentissimae.</p>
+            <img src="Contents/img/jforteroche-300x300.jpg" class="photoid" alt="Une photo de Jean Forteroche" />
+            <p>Jean Forteroche est né en 1955, dans l'ancienne cité minière de Bruay-Labuissière, près de Béthune. A l'école de
+                Béthune qu'il fréquente, un professeur de français remarque ses aptitudes littéraires et l'encourage à poursuivre ses études, 
+                ce que personne de sa famille n'avait fait jusque-là.</p>
+            <p>Jean étudie ensuite le droit à l'université, et devient avocat. Il plaide pendant une trentaine d'année, avant de changer de 
+                carrière, et de se lancer dans l'écriture.</p>
+            <p>Il publie son premier roman en 2011, en créant le personnage de l'inspecteur Malineaux, un inspecteur bourru, quelque peu porté sur la bouteille, 
+                accro de la cigarette, fan de musique rock des années 1970 et dont on peut suivre l'évolution de sa carrière au fil des romans.</p>
+            <p>Depuis 2012, Jean a quitté Paris, pour venir habiter dans le sud de la France à 
+                <a href="http://bellerive.iiidees.com/" title="Visitez le site culturel de Bellerive La Romaine">
+                    Bellerive la Romaine</a>, une charmante commune de l'Hérault.</p>
+            <p>Aujourd'hui, Jean innove en publiant un roman sur internet, épisode par épisode, et dont le contenu pourrait être
+            influencé par ses lecteurs.</p>
             <ul id="bio">
                 <li>
-                    <img src="Contents/img/pas-de-repos-pour-inspecteur-300x371.jpg" alt="Couverture du livre Pas de repos pour l'inspecteur"/>
+                    <img src="Contents/img/pas-de-repos-pour-inspecteur-300x300.jpg" alt="Couverture du livre Pas de repos pour l'inspecteur"/>
                     <h3>Pas de repos pour l'inspecteur</h3>
                     <p>Luke Maddison, jeune et richissime financier s’apprête à épouser Margaret Leferre, son amie d’enfance. 
                         C’est alors que Rex, le frère de Margaret, se suicide. Dans un dernier message, il désigne Luke comme 
@@ -24,7 +35,7 @@
                     <p>Editions du Porte-Marin, 2011, 23€</p>
                 </li>
                 <li>
-                    <img src="Contents/img/une-foule-dans-le-desert-300x407.jpg" alt="Couverture du livre une foule dans le désert"/>
+                    <img src="Contents/img/une-foule-dans-le-desert-300x300.jpg" alt="Couverture du livre une foule dans le désert"/>
                     <h3>Une foule dans le désert</h3>
                     <p>Chaque jour, Ben Jones, 38 ans, camionneur solitaire, arpente la 117, 
                         l'une des routes les plus reculées et les plus magnifiques du désert de l'Utah.</p>
@@ -41,7 +52,7 @@
                     <p>Editions du Porte-Marin, 2013, 25€</p>
                 </li>
                 <li>
-                    <img src="Contents/img/le-chemin-sans-retour-377x300.jpg" alt="Couverture du livre le chemin sans retour"/>
+                    <img src="Contents/img/le-chemin-sans-retour-300x300.jpg" alt="Couverture du livre le chemin sans retour"/>
                     <h3>Le chemin sans retour</h3>
                     <p>À quarante-trois ans, après la mort de sa mère, Meryl réalise enfin son rêve : quitter son pays de Galles 
                         natal et prendre la route à bord d’un camping-car.</p>
@@ -53,14 +64,14 @@
                     <p>Editions du Porte-Marin, 2014, 23€</p>
                 </li>
                 <li>
-                    <img src="Contents/img/allie-de-ennemi-300x431.jpg" alt="Couverture du livre L'allié de l'ennemi"/>
+                    <img src="Contents/img/allie-de-ennemi-300x301.jpg" alt="Couverture du livre L'allié de l'ennemi"/>
                     <h3>L'allié de l'ennemi</h3>
                     <p>Léon Pradel, un infâme maître chanteur, est retrouvé mort, assis devant son bureau, deux balles dans la tête.</p>
                     <p>Chargé de l’affaire, l'inspecteur Malineaux ne tarde pas à retrouver l’assassin, une jeune femme que la victime 
                         faisait chanter et qui menaçait de mettre en péril son heureux mariage. Cette dame a été vue par la concierge, 
                         fuyant les lieux du crime, une arme à la main.</p>
                     <p>Bien que le policier obtienne des aveux, le dossier va prendre une tournure inattendue grâce à la découverte de &ldquo;
-                    Monsieur le Président&ldquo;, allié du tueur.</p>
+                        Monsieur le Président&ldquo;, allié du tueur.</p>
                     <p>Cette puissante personnalité va utiliser tous les moyens de l'état afin d'entraver l'arrestation de la jeune femme.</p>
                     <p>Editions du Porte-Marin, 2016, 27€</p>
                 </li>

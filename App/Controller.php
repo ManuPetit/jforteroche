@@ -16,7 +16,7 @@ abstract class Controller {
     }
 
     //execute the action to do
-    public function doAction($action) {
+    public function doAction(string $action) {
         if (method_exists($this, $action)) {
             $this->action = $action;
             $this->{$this->action}();

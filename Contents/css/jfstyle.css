@@ -66,7 +66,7 @@ ul {
     padding: 0;
     list-style: none;
 }
-h1, h3 {
+h1, h3, h4 {
     font-family: 'BreeSerif', 'Times New Roman', Times, serif;
 }
 a {
@@ -82,6 +82,18 @@ a:hover {
     font-size: 1em;
     color: #e60000;
     font-weight: bold;
+}
+.dark {
+    padding: 15px;
+    background: #2a3132;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.photoid {
+    width: 150px;
+    float: left;
+    border-radius: 50%;
+    padding: 15px;
 }
 /*
         Header section
@@ -107,10 +119,13 @@ header li {
 header #branding {
     float: left;
 }
-header #branding h1 {
+header #branding a {
     font-family: 'ReenieBeanie', cursive, sans-serif;
     font-size: 2.5em;
     margin: 0;
+}
+header #branding a:hover {
+    color: #ffffff;
 }
 header nav {
     float: right;
@@ -193,18 +208,24 @@ aside#sidebar {
     width: 30%;
     margin-top: 10px;
 }
-aside#sidebar p {
-    font-size: 1.4em;
-    font-weight: bold;
+aside#sidebar a {
+    color: #cee0ed;
 }
 aside#sidebar .current a {
-    color: #be7203;
-}
-aside#sidebar a:hover {
     color: #e8a735;
 }
-aside hr {
-    display: none;
+aside#sidebar a:hover {
+    color: #be7203;
+}
+aside#sidebar h4 {
+    color: #ffffff;
+}
+aside#sidebar .ad-menu-level0 {
+    margin-top: 15px;
+    font-size: 1.3em;
+}
+aside#sidebar .ad-menu-level1 {
+    margin-left: 25px;
 }
 /*
         Main-col section
@@ -216,6 +237,109 @@ article#main-col {
 article h1 {
     font-size: 1.8em;
     letter-spacing: 0.1em;
+}
+/*
+        Main admin section
+*/
+#main-admin {
+    border-top: #e8a735 3px solid;
+    background: #2a3132; 
+    padding: 20px 0;
+    color: #ffffff;
+}
+#main-admin h3, h4 {
+    letter-spacing: 0.15em;
+}
+#main-admin h3.titles {
+    border-top: 2px solid #e8a735;
+}
+#main-col .cols {
+    width: 45%;
+    float: left;
+    padding: 15px;
+    border: #ffffff 1px solid;
+}
+
+td {
+    padding: 7px 15px;
+}
+td.numbers {
+    text-align: right;
+}
+.editing{
+    color: #F27CD5;
+}
+.published, .validated {
+    color: #7CF299;
+}
+.waiting {
+    color: #80dfff;
+}
+.signaled {
+    color: #ffaa33;
+}
+.hidden {
+    color: #ff3333;
+}
+.com-color {
+    color: #ffffff;
+}
+.cols table {
+    width: 100%;
+}
+td.links {
+    text-align: center;
+    color: #3a4445;
+    font-size: 1.2em;
+    width: 40%;
+}
+.paging {
+    text-align: center;
+    font-size: 1.3em;
+}
+.paging a, .paging span {
+    margin: 0 10px;
+}
+.links span {
+    margin:0 10px;
+}
+.links a {
+    color: #8fb8d6;
+}
+.links a:hover{
+    color: #e8a735;
+}
+th.name {
+    width: 60%;
+}
+th.action {
+    width: 40%;
+}
+.button-admin {
+    background: #e8a735;
+    border: none;
+    margin: 0 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #2a3132;    
+}
+.button-admin:hover {
+    color: #ffffff;
+    cursor: pointer;
+    background: #cf713b;
+}
+.button-admin:active {
+    background: #bd713b;
+    color: #ffffff;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+textarea.tinymce {
+    width: 90%;
+}
+input.large {
+    width: 90%;
+    font-size: 1.1em;
+    padding: 5px;
 }
 /*
         Comment section
@@ -254,9 +378,9 @@ ul#bio li {
     background: #acd3ec;
 }
 ul#bio img {
-    float: left;
+    float: right;
     margin: 10px 25px 20px 10px;
-    width: 150px;
+    width: 180px;
 }
 /*
         Connexion & comment form
@@ -283,7 +407,7 @@ ul#bio img {
     width: 330px;
 }
 .button-submit {
-    margin-top: 20px;
+    margin: 20px 0;
     height: 36px;
     background: #e8a735;
     border: none;
@@ -306,7 +430,6 @@ ul#bio img {
 */
 footer {
     padding: 20px;
-    margin-top: 20px;
     color: #2a3132;
     background-color: #e8a735;
     text-align: center;
@@ -319,11 +442,19 @@ footer {
     header nav,
     header nav li,
     #boxes .box,
+    #main-col .cols,
     article#main-col,
+    #main-col table,
     aside#sidebar {
         float: none;
         text-align: center;
         width: 100%;
+    }
+    .photoid {
+        float: none;
+    }
+    aside#sidebar .ad-menu-level1 {
+        margin-left: 0;
     }
     header {
         padding-bottom: 20px;
@@ -343,10 +474,14 @@ footer {
     #boxes h4 {
         text-align: center;
     }
-    aside hr {
-        display: block;
+    ul#bio img {
+        float: none;
+    }
+    textarea.tinymce {
         width: 100%;
-        margin: 20px 0;
+    }
+    input.large {
+        width: 100%;
     }
     .button-submit,
     .message input,
