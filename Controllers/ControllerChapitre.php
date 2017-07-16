@@ -65,9 +65,9 @@ class ControllerChapitre extends Controller {
      */
     public function commenter() {
         $forms = new Forms();
-        $idChapter = $this->request->getParameter("id");
-        $author = $this->request->getParameter("author");
-        $comment = $this->request->getParameter("comment");
+        $idChapter = ($this->request->parameterExists('idchapter')) ? $this->request->getParameter("idchapter") : 0;
+        $author = ($this->request->parameterExists('author')) ? $this->request->getParameter("author") : '';
+        $comment = ($this->request->parameterExists('comment')) ? $this->request->getParameter("comment") : '';
         //first we validate the author input
         $validation = new Validation();
         $validation->isRequired('author', $author);
@@ -116,6 +116,56 @@ class ControllerChapitre extends Controller {
         $idComment = $this->request->getParameter("id");
         $idChapter = $this->comment->signalComment($idComment);
         $this->redirect("chapitre", "index", $idChapter);
+    }
+
+    /**
+     * Method to respond to a comment
+     */
+    public function repondre() {
+        $forms = new Forms();
+        $idChapter = ($this->request->parameterExists('idchap')) ? $this->request->getParameter("idchap") : 0;
+        $author = ($this->request->parameterExists('pseudo')) ? $this->request->getParameter("pseudo") : '';
+        $comment = ($this->request->parameterExists('response')) ? $this->request->getParameter("response") : '';
+        $idComment = ($this->request->parameterExists('idcom')) ? $this->request->getParameter('idcom') : 0;
+        //first we validate the author input
+        //we validate a second time as we already validate with javascript
+        $validation = new Validation();
+        $validation->isRequired('pseudo', $author);
+        $validation->isAlphaNumInputOk('pseudo', $author, 3, 80);
+        //then we validate the comment and clean it up
+        $validation->isRequired('response', $comment);
+        $comment = $validation->cleanUpTextBlock($comment);
+        //retrieve errors
+        $errors = $validation->getErrors();
+        //get the data to either refresh the page or show the page with errors
+        $this->chapter->getPublishedChapter($idChapter);
+        $menu = $this->chapter->getChapterList();
+        $comments = $this->comment->getApprovedCommentsChapter($idChapter);
+        if (isset($errors) && $errors != null) {
+            //show the index page again with errors
+            $info = "Une erreur s'est produite. Votre message n'a pas été enregistré.";
+            $this->generateView(array(
+                'menu' => $menu,
+                'chapter' => $this->chapter,
+                'comments' => $comments,
+                'forms' => $forms,
+                'value' => null,
+                'errors' => null,
+                'message' => $info), 'index');
+        } else {
+            $this->comment->addComment($idChapter, $author, $comment, $idComment);
+            //$info ="<script>window.alert(\"Votre message a bien été enregistré. Il est en attente de validation.\nMerci.\")</script>";
+            $info = "Votre message a bien été enregistré. Il est en attente de validation. Merci.";
+            //default action
+            $this->generateView(array(
+                'menu' => $menu,
+                'chapter' => $this->chapter,
+                'comments' => $comments,
+                'forms' => $forms,
+                'value' => null,
+                'errors' => null,
+                'message' => $info), 'index');
+        }
     }
 
 }

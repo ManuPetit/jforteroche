@@ -40,7 +40,7 @@
                     <form class="message" action="chapitre/commenter" method="post">
                         <?php $forms->createInputText('author', 'Nom', true, 'Tapez votre nom...', $value, $errors); ?>
                         <?php $forms->createTextarea('comment', 'Votre message', true, 'Tapez votre message...', $value, $errors); ?>
-                        <input type="hidden" name="id" value="<?php echo $chapter->getId(); ?>" />
+                        <input type="hidden" name="idchapter" value="<?php echo $chapter->getId(); ?>" />
                         <button type="submit" class="button-submit">Commentez ce chapitre...</button>
                     </form>
                 </div>

@@ -133,7 +133,7 @@ class Chapitre extends Model {
         $sql = "SELECT chapters.id, title, CONCAT(SUBSTRING_INDEX(content, '.',4),'...') as content, "
                 . " chapters.id_user as id_user, CONCAT(name, ' ', surname) as user_name, id_state, date_last_modif FROM chapters "
                 . "INNER JOIN users ON chapters.id_user = users.id INNER JOIN states ON chapters.id_state=states.id "
-                . "WHERE id_state = 2 ORDER BY date_last_modif DESC LIMIT 3 ";
+                . "WHERE id_state = 2 ORDER BY id DESC LIMIT 3 ";
         $rows = $this->getAll($sql);
         if (!empty($rows)) {
             $chapters = array();
@@ -160,7 +160,7 @@ class Chapitre extends Model {
      * @return int  the id of the chapter or null
      */
     public function getFirstPublishedChapterId(){
-        $sql = "SELECT id FROM chapters WHERE id_state = 2 ORDER BY date_last_modif LIMIT 1";
+        $sql = "SELECT id FROM chapters WHERE id_state = 2 ORDER BY id LIMIT 1";
         return $this->GetOne($sql);
     }
     /**

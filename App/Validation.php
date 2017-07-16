@@ -32,7 +32,7 @@ class Validation {
      */
     public function isRequired($inputName, $input) {
         if (trim($input) == '') {
-            $this->errors['err_' . $inputName] = "vous devez entrer une valeur dans ce champs.";
+            $this->errors['err_' . $inputName] = "vous devez entrer une valeur dans ce champs";
         }
     }
 
