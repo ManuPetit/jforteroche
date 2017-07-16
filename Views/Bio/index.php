@@ -18,6 +18,8 @@
             <p>Depuis 2012, Jean a quitté Paris, pour venir habiter dans le sud de la France à 
                 <a href="http://bellerive.iiidees.com/" title="Visitez le site culturel de Bellerive La Romaine">
                     Bellerive la Romaine</a>, une charmante commune de l'Hérault.</p>
+            <p>Jean a également pris part, en tant qu'acteur, dans quelques production théatrales locales, dont en 2014, le rôle principale
+             dans Cyrano de Bergerac.</p>
             <p>Aujourd'hui, Jean innove en publiant un roman sur internet, épisode par épisode, et dont le contenu pourrait être
             influencé par ses lecteurs.</p>
             <ul id="bio">

@@ -10,6 +10,8 @@ class Router {
     //routing of a request
     public function RouterRequest() {
         try {
+            ini_set("display_errors", "1");
+            error_reporting(-1);
             //merge parametres from both GET and POST
             if (isset($_GET['params']) && $_GET['params'] != '') {
                 $params = array();

@@ -26,7 +26,7 @@ class Chapitre extends Model {
         return $this->title;
     }
 
-    public function setTitle(string $title) {
+    public function setTitle( $title) {
         $this->title = $title;
     }
 
@@ -34,7 +34,7 @@ class Chapitre extends Model {
         return $this->content;
     }
 
-    public function setContent(string $content) {
+    public function setContent( $content) {
         $this->content = $content;
     }
 
@@ -42,7 +42,7 @@ class Chapitre extends Model {
         return $this->id_user;
     }
 
-    public function setIdUser(int $idUser) {
+    public function setIdUser( $idUser) {
         $this->id_user = $idUser;
     }
 
@@ -55,13 +55,15 @@ class Chapitre extends Model {
         return $this->id_state;
     }
 
-    public function setIdState(int $idState) {
+    public function setIdState( $idState) {
         $this->id_state = $idState;
     }
 
     //  Read only property
     //  The output date is formatted to french system
     public function getDateLastModif() {
+        $timeZone = "Europe/Paris";
+        date_default_timezone_set($timeZone);
         $date = date_create($this->date_last_modif);
         return date_format($date, 'd/m/Y');
     }
@@ -73,7 +75,7 @@ class Chapitre extends Model {
      * @param int $idChapter    the ID of the chapter
      * @throws Exception
      */
-    public function getPublishedChapter(int $idChapter) {
+    public function getPublishedChapter( $idChapter) {
         $sql = "SELECT chapters.id as id, title, content, chapters.id_user as id_user, CONCAT(name, ' ', surname) as user_name,"
                 . "  id_state, date_last_modif "
                 . "FROM chapters INNER JOIN users ON chapters.id_user = users.id"
@@ -100,7 +102,7 @@ class Chapitre extends Model {
      * @param int $idChapter    the ID of the chapter
      * @throws Exception
      */
-    public function getChapter(int $idChapter) {
+    public function getChapter( $idChapter) {
         $sql = "SELECT chapters.id as id, title, content, chapters.id_user as id_user, CONCAT(name, ' ', surname) as user_name,"
                 . "  id_state, date_last_modif "
                 . "FROM chapters INNER JOIN users ON chapters.id_user = users.id"
@@ -184,7 +186,7 @@ class Chapitre extends Model {
      * @return array    this is an array of 'Chapitre' object
      *         null     if no chapters have been found
      */
-    public function getAllChapters(int $idState){
+    public function getAllChapters( $idState){
         if ($idState == 1) {
             $inner = 'id_state = 1';
         }elseif ($idState == 2) {
@@ -241,7 +243,7 @@ class Chapitre extends Model {
      * @param string $type  The type of chapters (all, edit or published)
      * @return int          The number of the chapters in this category
      */
-    private function getNumberChapter(string $type) {
+    private function getNumberChapter( $type) {
         if ($type == 'edit') {
             $inner = 'id_state = 1';
         } elseif ($type == 'publish') {
@@ -261,7 +263,7 @@ class Chapitre extends Model {
      * @param int $state        The state of the chapter
      * @param int $user         The user ID of the user who created the chapter
      */
-    public function saveNewChapter(string $title, string $content, int $state, int $user){
+    public function saveNewChapter( $title,  $content,  $state,  $user){
         $sql = "INSERT INTO chapters (title, content, id_user, id_state, date_last_modif)"
                 . " VALUES (:title, :content, :id_user, :id_state, NOW())";
         $params = array(
@@ -279,7 +281,7 @@ class Chapitre extends Model {
      * @param int $id       The ID of the chapter being updated
      * @param int $state    The state of the chapter
      */
-    public function updateState(int $id, int $state){
+    public function updateState( $id,  $state){
         $sql = "UPDATE chapters SET id_state = :id_state, date_last_modif = NOW() WHERE id = :id";
         $params = array(
             ':id_state' => $state,
@@ -296,7 +298,7 @@ class Chapitre extends Model {
      * @param string $content   The content of the chapter
      * @param int $state        the state of the chapter
      */
-    public function updateChapter(int $id, string $title, string $content, int $state){
+    public function updateChapter( $id,  $title,  $content,  $state){
         $sql = "UPDATE chapters SET title = :title, content = :content, id_state = :state,"
                 . " date_last_modif = NOW() WHERE id = :id";
         $params = array(

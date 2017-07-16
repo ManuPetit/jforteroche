@@ -27,7 +27,7 @@ class Utilisateur extends Model {
         return $this->login;
     }
     
-    public function setLogin(string $login) {
+    public function setLogin( $login) {
         $this->login = $login;
     }
     
@@ -35,7 +35,7 @@ class Utilisateur extends Model {
         return $this->email;
     }
     
-    public function setEmail(string $email){
+    public function setEmail( $email){
         $this->email = $email;
     }
     
@@ -43,7 +43,7 @@ class Utilisateur extends Model {
         return $this->name;
     }
     
-    public function setName(string $name){
+    public function setName( $name){
         $this->name = $name;                
     }
     
@@ -51,7 +51,7 @@ class Utilisateur extends Model {
         return $this->surname;
     }
     
-    public function setSurname(string $surname){
+    public function setSurname( $surname){
         $this->surname = $surname;
     }
     
@@ -68,6 +68,8 @@ class Utilisateur extends Model {
     //  read only property
     //  The output date is formatted to french system
     public function getDateLastLogin(){
+        $timeZone = "Europe/Paris";
+        date_default_timezone_set($timeZone);
         $date = date_create($this->date_last_login);
         return date_format($date, 'd/m/Y à H:i');
     }
@@ -80,7 +82,7 @@ class Utilisateur extends Model {
      * 
      * @param string $password  The password typed by the user.
      */
-    public function setPassword(string $password){
+    public function setPassword( $password){
         if (isset($this->salt) && $this->salt != '') {
             $this->password = $this->makePassword($password, $this->salt);
         } else {
@@ -96,7 +98,7 @@ class Utilisateur extends Model {
      * @param string $password  The password of the user
      * @return boolean          True if we have a match otherwise false
      */
-    public function canLogin(string $name, string $password) {
+    public function canLogin($name,$password) {
         //get the salt for this user
         $salt = $this->getUserSalt($name);
         if (isset($salt) && ($salt != '')) {
@@ -126,7 +128,7 @@ class Utilisateur extends Model {
      * @param string $password
      * @throws Exception
      */
-    public function getUserDetails(string $name, string $password) {
+    public function getUserDetails($name,  $password) {
         $salt = $this->getUserSalt($name);
         $hash = $this->makePassword($password, $salt);
         $sql = "SELECT id, login, email, name, surname, date_last_login "
@@ -150,7 +152,7 @@ class Utilisateur extends Model {
         }
     }
 
-    public function getUser(int $idUser){
+    public function getUser( $idUser){
         $sql = "SELECT login, email, name, surname , password, salt, date_last_login "
                 . "FROM users WHERE id = :id";
         $params = array(':id' => $idUser);
@@ -173,7 +175,7 @@ class Utilisateur extends Model {
      * 
      * @param int $idUser
      */
-    public function updateLastLogin(int $idUser){
+    public function updateLastLogin( $idUser){
         $sql = "UPDATE users SET date_last_login = NOW()"
                 . " WHERE id = :idUser";
         $params = array(':idUser' => $idUser);
@@ -186,7 +188,7 @@ class Utilisateur extends Model {
      * @param string $name  The login name of the user
      * @return string       The salt
      */
-    private function getUserSalt(string $name) {
+    private function getUserSalt( $name) {
         $sql = "SELECT salt FROM users WHERE login = :name";
         $params = array(':name' => $name);
         $salt = $this->GetOne($sql, $params);
@@ -199,7 +201,10 @@ class Utilisateur extends Model {
      * @param int $max  Maximum number of characters in the salt
      * @return string   The salt generated
      */
-    private function generateSalt(int $max = 64) {
+    private function generateSalt( $max = null) {
+        if (is_null($max) || $max > 64){
+            $max = 64;
+        }
         $characterList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?";
         $i = 0;
         $salt = "";
@@ -216,10 +221,29 @@ class Utilisateur extends Model {
      * @param string $salt      The salt of the user
      * @return string           The hashed password to be stocked in the DB
      */
-    private function makePassword(string $password, string $salt) {
+    private function makePassword( $password,  $salt) {
         $combo = $salt . $password;
         $hash = hash('sha512', $combo);
         return $hash;
+    }
+    
+    public function updateEmail( $email){
+        $sql = "UPDATE users SET email = :email WHERE id = :id";
+        $params = array(
+            ':email' => $email,
+            ':id' => $this->id
+        );
+        $this->execute($sql, $params);
+    }
+    
+    public function updatePassword( $password){
+        $pass = $this->makePassword($password, $this->salt);
+        $sql = "UPDATE users SET password = :pass WHERE ID = :id";
+        $params = array(
+            ':pass' => $pass,
+            ':id' => $this->id
+        );
+        $this->execute($sql, $params);
     }
 
 }

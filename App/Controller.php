@@ -16,7 +16,7 @@ abstract class Controller {
     }
 
     //execute the action to do
-    public function doAction(string $action) {
+    public function doAction($action) {
         if (method_exists($this, $action)) {
             $this->action = $action;
             $this->{$this->action}();
@@ -44,13 +44,19 @@ abstract class Controller {
 
     //redirect function can take an id parameter as 
     protected function redirect($controller, $action = null, $id = null) {
-        $webRoot = Configuration::getSetting("webRoot", "/");
-        if (isset($id) && $id != '') {
-            //redirects to the URL webRoot/controller/action/id
-            header("Location:" . $webRoot . $controller . "/" . $action . "/" . $id);
-        } else {
-            //redirects to the URL webRoot/controller/action
-            header("Location:" . $webRoot . $controller . "/" . $action);
+        try {
+            $webRoot = Configuration::getSetting("webRoot", "/");
+            if (isset($id) && $id != '') {
+                //redirects to the URL webRoot/controller/action/id
+                $location =  $webRoot . $controller . "/" . $action . "/" . $id;
+            } else {
+                //redirects to the URL webRoot/controller/action
+                $location = $webRoot . $controller . "/" . $action;
+            } 
+            header("Location: " . $location);
+            exit();
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
         }
     }
 

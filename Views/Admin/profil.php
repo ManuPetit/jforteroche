@@ -22,3 +22,8 @@
         </article>
     </div>
 </section>
+<?php if (isset($message)): ?>
+    <script>
+        window.alert("<?php echo $message; ?>");
+    </script>
+<?php endif; ?>

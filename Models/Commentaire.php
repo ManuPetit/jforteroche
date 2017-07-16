@@ -30,7 +30,7 @@ class Commentaire extends Model {
         return $this->id_chapter;
     }
 
-    public function setIdChapter(int $idChapter) {
+    public function setIdChapter( $idChapter) {
         $this->id_chapter = $idChapter;
     }
 
@@ -38,7 +38,7 @@ class Commentaire extends Model {
         return $this->id_parent;
     }
 
-    public function setIdParent(int $idParent) {
+    public function setIdParent( $idParent) {
         $this->id_parent = $idParent;
     }
 
@@ -46,7 +46,7 @@ class Commentaire extends Model {
         return $this->user_name;
     }
 
-    public function setUserName(string $userName) {
+    public function setUserName( $userName) {
         $this->user_name = $userName;
     }
 
@@ -54,7 +54,7 @@ class Commentaire extends Model {
         return $this->comment;
     }
 
-    public function setComment(string $comment) {
+    public function setComment( $comment) {
         $this->comment = $comment;
     }
 
@@ -62,13 +62,15 @@ class Commentaire extends Model {
         return $this->id_approval;
     }
 
-    public function setIdApproval(int $idApproval) {
+    public function setIdApproval( $idApproval) {
         $this->id_approval = $idApproval;
     }
 
     //  Read only property
     //  The output date is formatted to french system
     public function getDateWritten() {
+        $timeZone = "Europe/Paris";
+        date_default_timezone_set($timeZone);
         $date = date_create($this->date_written);
         return date_format($date, 'd/m/Y à H:i');
     }
@@ -87,7 +89,7 @@ class Commentaire extends Model {
      * @return array            This is an array of 'Commentaire' object
      *         null             if no comments were found for this chapter 
      */
-    public function getApprovedCommentsChapter(int $idChapter) {
+    public function getApprovedCommentsChapter( $idChapter) {
         $sql = "SELECT id, id_chapter, id_parent, user_name, comment, id_approval, date_written FROM comments "
                 . "WHERE id_chapter = :idChapter AND id_approval = 2 ORDER BY date_written";
         $params = array(':idChapter' => $idChapter);
@@ -95,7 +97,7 @@ class Commentaire extends Model {
         if (!empty($rows)) {
             //we call a recursive method to order the comment from parents to child
             unset($this->recursiveComments);
-            $this->getRecursiveComments($rows, 0);
+            $this->getRecursiveComments($rows, 0, 0);
             if (isset($this->recursiveComments)) {
                 return $this->recursiveComments;
             } else {
@@ -116,7 +118,10 @@ class Commentaire extends Model {
      * @param int $parent   The id of the parent
      * @param int $level    The level of the child
      */
-    private function getRecursiveComments(array $array, int $parent, int $level = 0) {
+    private function getRecursiveComments( $array,  $parent,  $level = null) {
+        if (is_null($level)) {
+            $level = 0;
+        }
         foreach ($array as $key => $value) {
             if ($value['id_parent'] == $parent) {
                 $comment = new Commentaire();
@@ -144,7 +149,10 @@ class Commentaire extends Model {
      * @param int $idParent     The parent id (if a comment is an answer to another one) or
      *                          0 if it is just a comment of the chapter
      */
-    public function addComment(int $idChapter, string $userName, string $comment, int $idParent = 0) {
+    public function addComment( $idChapter,  $userName,  $comment,  $idParent = null) {
+        if (is_null($idParent)) {
+            $idParent = 0;
+        }
         $sql = "INSERT INTO comments (id_chapter, id_parent, user_name, comment, id_approval, date_written)"
                 . " VALUES (:idChapter, :idParent, :userName, :comment, 1, NOW())";
         $params = array(
@@ -166,7 +174,7 @@ class Commentaire extends Model {
      * @return array            Array of commentaires
      *         Null     
      */
-    public function getAllComments(int $idApproval, int $start, int $display) {
+    public function getAllComments( $idApproval, $start, $display) {
     //public function getAllComments($idApproval) {
         if ($idApproval == 1) {
             $inner = 'id_approval = 1';
@@ -179,6 +187,8 @@ class Commentaire extends Model {
         } else {
             $inner = 'id_approval <> 5';
         }
+        $start = (int)$start;
+        $display = (int)$display;
         $sql = "SELECT id, user_name, comment, id_approval, date_written FROM comments "
                 . "WHERE $inner ORDER BY id_approval, date_written ASC LIMIT :start, :display";
 //        $sql = "SELECT id, user_name, comment, id_approval, date_written FROM comments "
@@ -234,7 +244,7 @@ class Commentaire extends Model {
      * @param int $idApproval   The type of comments we search
      * @return int              The total number of comments in the database
      */
-    public function getTotalComments(int $idApproval) {
+    public function getTotalComments( $idApproval) {
         switch ($idApproval){
             case '0':
                 $approval = 'all';
@@ -265,7 +275,7 @@ class Commentaire extends Model {
      * @param string $type  The approval type of comment we want
      * @return int
      */
-    private function getNumberComment(string $type) {
+    private function getNumberComment( $type) {
         if ($type == 'waiting') {
             $inner = 'id_approval = 1';
         } elseif ($type == 'valid') {
@@ -286,7 +296,7 @@ class Commentaire extends Model {
      * 
      * @param int $idComment    The ID of the comment we want to validate
      */
-    public function validateComment(int $idComment) {
+    public function validateComment( $idComment) {
         $this->setCommentApproval($idComment, 'validate');
     }
 
@@ -296,7 +306,7 @@ class Commentaire extends Model {
      * @param int $idComment    The ID of the comment we want to signal
      * @return int              The id of the chapter related to this comment
      */
-    public function signalComment(int $idComment) {
+    public function signalComment( $idComment) {
         //update the table
         $this->setCommentApproval($idComment, 'signal');
         //retrieve chapter id
@@ -310,7 +320,7 @@ class Commentaire extends Model {
      * 
      * @param int $idComment    The ID of the comment we want to hide
      */
-    public function hideComment(int $idComment) {
+    public function hideComment( $idComment) {
         $this->setCommentApproval($idComment, 'hide');
     }
 
@@ -319,7 +329,7 @@ class Commentaire extends Model {
      * 
      * @param int $idComment    The ID of the comment we want to delete
      */
-    public function deleteComment(int $idComment) {
+    public function deleteComment( $idComment) {
         $this->setCommentApproval($idComment, 'delete');
     }
 
@@ -329,7 +339,7 @@ class Commentaire extends Model {
      * @param int $idComment    The ID of the comment we want to set
      * @param string $$approval The type of approval
      */
-    private function setCommentApproval(int $idComment,string $approval) {
+    private function setCommentApproval( $idComment, $approval) {
         if ($approval == 'validate') {
             $inner = 2;
         } elseif ($approval == 'signal') {

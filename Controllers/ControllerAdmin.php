@@ -153,7 +153,7 @@ class ControllerAdmin extends ControllerSecurity {
         $errors = $validation->getErrors();
         if (isset($errors) && $errors != null) {
             $value['title'] = $title;
-            $value['episode'] = $episode;
+            $value['episode'] = $content;
             $this->generateView(array(
                 'adminMenu' => $adminMenu,
                 'forms' => $forms,
@@ -199,7 +199,7 @@ class ControllerAdmin extends ControllerSecurity {
         if (isset($errors) && $errors != null) {
             $adminMenu = Menus::createAdminMenu('modifier');
             $value['title'] = $title;
-            $value['episode'] = $episode;
+            $value['episode'] = $content;
             $value['id'] = $id;
             $this->generateView(array(
                 'adminMenu' => $adminMenu,
@@ -328,16 +328,97 @@ class ControllerAdmin extends ControllerSecurity {
             'user' => $this->user
         ));
     }
-    
-    public function changer(){
+
+    /**
+     * shows the page to modify user profil (email and password)
+     */
+    public function changer() {
         $forms = new Forms();
         //retrieve the user details with session User ID
         $this->user->getUser($this->request->getSession()->getParameter('idUser'));
         $adminMenu = Menus::createAdminMenu('changer');
+        $value['email'] = $this->user->getEmail();
         $this->generateView(array(
             'adminMenu' => $adminMenu,
-            'user' => $this->user
+            'forms' => $forms,
+            'user' => $this->user,
+            'value' => $value,
+            'errors' => null
         ));
+    }
+
+    /**
+     * Method to change email
+     */
+    public function email() {
+        $email = ($this->request->parameterExists('email')) ? $this->request->getParameter('email') : '';
+        $this->user->getUser($this->request->getSession()->getParameter('idUser'));
+        //verification of the input
+        $validation = new Validation();
+        $validation->isRequired('email', $email);
+        $validation->isValidEmail('email', $email);
+        //retrieve the errors
+        $errors = $validation->getErrors();
+        if (isset($errors) && $errors != null) {
+            $adminMenu = Menus::createAdminMenu('changer');
+            $value['email'] = $email;
+            $forms = new Forms();
+            $this->generateView(array(
+                'adminMenu' => $adminMenu,
+                'forms' => $forms,
+                'user' => $this->user,
+                'value' => $value,
+                'errors' => $errors
+                    ), 'changer');
+        } else {
+            $this->user->updateEmail($email);
+            $this->user->getUser($this->request->getSession()->getParameter('idUser'));
+            $message = 'Votre email a bien été mis à jour.';
+            $adminMenu = Menus::createAdminMenu('profil');
+            $this->generateView(array(
+                'adminMenu' => $adminMenu,
+                'user' => $this->user,
+                'message' => $message
+            ), 'profil');
+        }
+    }
+    
+    /**
+     * method to update password
+     */
+    public function motdepasse(){
+        $passOne = ($this->request->parameterExists('passone')) ? $this->request->getParameter('passone') : '';
+        $passTwo = ($this->request->parameterExists('passtwo')) ? $this->request->getParameter('passtwo') : '';
+        $this->user->getUser($this->request->getSession()->getParameter('idUser'));
+        //validation of the input
+        $validation = new Validation();
+        $validation->isPasswordChecked('passone', $passOne);
+        $validation->isPasswordMatched('passtwo', $passOne, $passTwo);
+        //retrieve the errors
+        $errors = $validation->getErrors();
+        if (isset($errors) && $errors != null){
+            $value['email'] = $this->user->getEmail();
+            $value['passone'] = $passOne;
+            $value['passtwo'] = $passTwo;
+            $adminMenu = Menus::createAdminMenu('changer');
+            $forms = new Forms();
+            $this->generateView(array(
+                'adminMenu' => $adminMenu,
+                'forms' => $forms,
+                'user' => $this->user,
+                'value' => $value,
+                'errors' => $errors
+                    ), 'changer');
+        }else{
+            $this->user->updatePassword($passOne);
+            $message = 'Votre mot de passe a bien été mis à jour.';
+            $adminMenu = Menus::createAdminMenu('profil');
+            $this->generateView(array(
+                'adminMenu' => $adminMenu,
+                'user' => $this->user,
+                'message' => $message
+            ), 'profil');
+        }
     }
 
 }

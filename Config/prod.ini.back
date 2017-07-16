@@ -1,0 +1,9 @@
+; fichier de configuration de dévelopement
+
+[BD]
+dsn = 'mysql:host=db683917835.db.1and1.com;dbname=db683917835;charset=utf8'
+login = dbo683917835
+mdp = 29YoQmnQDv24Ua33HWQV
+
+[Installation]
+racineWeb = /ecrivain/

@@ -10,7 +10,7 @@ abstract class ControllerSecurity extends Controller {
      * 
      * @param string $action    Action to be realised
      */
-    public function doAction(string $action){
+    public function doAction($action){
         if ($this->request->getSession()->parameterExists("idUser")){
             parent::doAction($action);
         }else{

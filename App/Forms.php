@@ -28,10 +28,37 @@ class Forms {
         echo $this->createGenericInput($name, $label, 'text', $required, $placeholder, $value, $errors);
     }
 
+    /**
+     * Method to create a large text input to be used in a view. 
+     * It calls a generic function to do the work
+     * 
+     * @param string $name          The name of the input
+     * @param string $label         The label show for the input
+     * @param bool $required        Set the required attribute. True by default
+     * @param string $placeholder   Optional : the text to show on the input placeholder
+     * @param array $value          The value of the input if any
+     * @param array $error          The error of the input if any
+     * @return html                 The completed input field, with values and errors if any
+     */
     public function createLargeInputText($name, $label, $required = true, $placeholder = null, $value = null, $errors = null) {
         echo $this->createGenericInput($name, $label, 'text', $required, $placeholder, $value, $errors, true);
     }
 
+    /**
+     * Method to create a email input to be used in a view. 
+     * It calls a generic function to do the work
+     * 
+     * @param string $name          The name of the input
+     * @param string $label         The label show for the input
+     * @param bool $required        Set the required attribute. True by default
+     * @param string $placeholder   Optional : the text to show on the input placeholder
+     * @param array $value          The value of the input if any
+     * @param array $error          The error of the input if any
+     * @return html                 The completed input field, with values and errors if any
+     */
+    public function createInputEmail($name, $label, $required = true, $placeholder = null, $value = null, $errors = null) {
+        echo $this->createGenericInput($name, $label, 'email', $required, $placeholder, $value, $errors);
+    }
     /**
      * Method to create a password input to be used in a view. 
      * It calls a generic function to do the work
@@ -40,8 +67,8 @@ class Forms {
      * @param string $label         The label show for the input
      * @param array $error          The error of the input if any
      */
-    public function createInputPassword($name, $label) {
-        echo $this->createGenericInput($name, $label, 'password', true);
+    public function createInputPassword($name, $label, $errors = null) {
+        echo $this->createGenericInput($name, $label, 'password', true, null, null, $errors);
     }
 
     /**

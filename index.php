@@ -1,4 +1,3 @@
- 
 <?php
 
 require 'App/Router.php';
