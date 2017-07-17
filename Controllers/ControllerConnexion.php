@@ -2,6 +2,7 @@
 
 require_once 'App/Controller.php';
 require_once 'App/Forms.php';
+require_once 'App/Validation.php';
 require_once 'Models/Utilisateur.php';
 
 class ControllerConnexion extends Controller {
@@ -20,6 +21,7 @@ class ControllerConnexion extends Controller {
         $forms = new Forms();
         $this->generateView(array(
             'forms' => $forms,
+            'turn' => 0,
             'value' => null,
             'errors' => null
         ));
@@ -46,10 +48,14 @@ class ControllerConnexion extends Controller {
                     $this->redirect("admin");
                 } else {
                     $forms = new Forms();
+                    //check for the number of bad password to show link message
+                    $turn = ($this->request->parameterExists('turn')) ? $this->request->getParameter('turn') : 0;
+                    $turn ++;
                     $value['login'] = $login;
                     $errors['err_login'] = "nom de login ou mot de passe incorrect";
                     $this->generateView(array(
                         'forms' => $forms,
+                        'turn' => $turn,
                         'value' => $value,
                         'errors' => $errors
                             ), "index");
@@ -68,6 +74,45 @@ class ControllerConnexion extends Controller {
     public function deconnecter() {
         $this->request->getSession()->endSession();
         $this->redirect("accueil");
+    }
+
+    /**
+     * shows the form to ask for a new password
+     */
+    public function link() {
+        $forms = new Forms();
+        $this->generateView(array(
+            'forms' => $forms,
+            'value' => null,
+            'errors' => null
+        ));
+    }
+
+    /**
+     * Method to send a link to the new password generating system
+     */
+    public function mail() {
+        $mail = ($this->request->parameterExists('email')) ? $this->request->getParameter('email') : '';
+        //validate the email
+        $validation = new Validation();
+        $validation->isRequired('email', $mail);
+        $validation->isValidEmail('email', $mail);
+        $errors = $validation->getErrors();
+        if (isset($errors) && $errors != '') {
+            //we don't have a valid email. show the form again
+            $forms = new Forms();
+            $value['email'] = $mail;
+            $this->generateView(array(
+                'forms' => $forms,
+                'value' => $value,
+                'errors' => $errors
+            ), 'link');
+        } else {
+            $message = $this->user->generateNewPassword($mail);
+            $this->generateView(array(
+                'message' => $message
+            ), 'mailing');
+        }
     }
 
 }
