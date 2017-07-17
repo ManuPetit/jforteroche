@@ -6,4 +6,6 @@ login = dbo683917835
 mdp = 29YoQmnQDv24Ua33HWQV
 
 [Installation]
-racineWeb = /ecrivain/
+
+[Error]
+live = true

@@ -189,7 +189,7 @@ class Forms {
             $html .= "</p>\n";
             return $html;
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            throw new Exception($ex);
         }
     }
 
@@ -223,7 +223,7 @@ class Forms {
             $html .= "\n";
             echo $html;
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            throw new Exception($ex);
         }
     }
 
@@ -273,7 +273,7 @@ class Forms {
             $html .= "\n";
             echo $html;
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            throw new Exception($ex);
         }
     }
 
@@ -299,7 +299,7 @@ class Forms {
             }
             echo $html;
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            throw new Exception($ex);
         }
     }
 
@@ -329,7 +329,7 @@ class Forms {
             }
             echo $html;
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            throw new Exception($ex);
         }
     }
 
@@ -375,7 +375,7 @@ class Forms {
                 echo $html;
             }
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            throw new Exception($ex);
         }
     }
 

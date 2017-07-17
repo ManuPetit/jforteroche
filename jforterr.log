@@ -1,0 +1,29 @@
+
+*******************
+** 2017-07-17 10:45:30
+*******************
+** Création du fichier log sur le serveur
+
+----------------------------------------------------------------------------
+
+*******************
+** 2017-07-17 10:46:15
+*******************
+** Error in the script '/homepages/40/d342966983/htdocs/ecrivain/Models/Chapitre.php' on line 95 :
+Chapitre invalide...
+
+----------------------------------------------------------------------------
+*******************
+** 2017-07-17 10:46:33
+*******************
+** Error in the script '/homepages/40/d342966983/htdocs/ecrivain/App/Router.php' on line 48 :
+Fichier 'Controllers/ControllerMamab.php' introuvable
+
+----------------------------------------------------------------------------
+*******************
+** 2017-07-17 10:46:49
+*******************
+** Error in the script '/homepages/40/d342966983/htdocs/ecrivain/App/Controller.php' on line 25 :
+Action 'tot' non définie dans la classe ControllerAccueil
+
+----------------------------------------------------------------------------

@@ -56,7 +56,7 @@ abstract class Controller {
             header("Location: " . $location);
             exit();
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            throw new Exception($ex);
         }
     }
 

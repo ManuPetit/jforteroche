@@ -1,0 +1,24 @@
+
+*******************
+** 2017-07-17 10:45:30
+*******************
+** Création du fichier log sur le serveur
+
+----------------------------------------------------------------------------
+
+*******************
+** 2017-07-17 10:50:50
+*******************
+** Error in the script 'C:\wamp64\www\openclassrooms\jfp3\App\Model.php' on line 28 :
+PDOException: SQLSTATE[HY000] [1049] Base 'forterche' inconnue in C:\wamp64\www\openclassrooms\jfp3\App\Model.php:25
+Stack trace:
+#0 C:\wamp64\www\openclassrooms\jfp3\App\Model.php(25): PDO->__construct('mysql:host=loca...', 'root', '', Array)
+#1 C:\wamp64\www\openclassrooms\jfp3\App\Model.php(66): Model->getDB()
+#2 C:\wamp64\www\openclassrooms\jfp3\Models\Chapitre.php(137): Model->getAll('SELECT chapters...')
+#3 C:\wamp64\www\openclassrooms\jfp3\Controllers\ControllerAccueil.php(27): Chapitre->getLastPublishedChapters()
+#4 C:\wamp64\www\openclassrooms\jfp3\App\Controller.php(22): ControllerAccueil->index()
+#5 C:\wamp64\www\openclassrooms\jfp3\App\Router.php(24): Controller->doAction('index')
+#6 C:\wamp64\www\openclassrooms\jfp3\index.php(6): Router->RouterRequest()
+#7 {main}
+
+----------------------------------------------------------------------------

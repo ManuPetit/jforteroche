@@ -25,7 +25,7 @@ abstract class Model {
                 self::$db = new PDO($dsn, $login, $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             } catch (PDOException $ex) {
                 self::close();
-                throw new Exception($ex->getMessage());
+                throw new Exception($ex);
             }
         }
         return self::$db;
@@ -49,7 +49,7 @@ abstract class Model {
             $statement = $handler->prepare($query);
             return $statement->execute($params);
         } catch (PDOException $ex) {
-            throw new Exception($ex->getMessage());
+            throw new Exception($ex);
         }
     }
 
@@ -75,7 +75,7 @@ abstract class Model {
             }
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
-            throw new Exception($ex->getMessage());
+            throw new Exception($ex);
         }
         return $result;
     }
@@ -94,7 +94,7 @@ abstract class Model {
             $statement->execute($params);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $ex) {
-            throw new Exception($ex->getMessage());
+            throw new Exception($ex);
         }
         return $result;
     }
@@ -115,7 +115,7 @@ abstract class Model {
             //Get the first value
             $result = $result[0];
         } catch (PDOException $ex) {
-            throw new Exception($ex->getMessage());
+            throw new Exception($ex);
         }
         //retourne le resultat
         return $result;

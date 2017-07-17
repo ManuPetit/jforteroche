@@ -494,3 +494,8 @@ footer {
         width: 90%;
     }
 }
+@media (min-width: 1940px){
+    #cover {
+        background: url('../img/alaska-cover-4288x2848.jpg') no-repeat -700px -1400px;
+    }    
+}

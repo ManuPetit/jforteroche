@@ -10,8 +10,6 @@ class Router {
     //routing of a request
     public function RouterRequest() {
         try {
-            ini_set("display_errors", "1");
-            error_reporting(-1);
             //merge parametres from both GET and POST
             if (isset($_GET['params']) && $_GET['params'] != '') {
                 $params = array();
@@ -61,10 +59,24 @@ class Router {
         return $action;
     }
 
-    //show an error
+    //show an error or just a message depending if the site is live or not
     private function showError(Exception $exception) {
         $view = new View($this->request, "erreur");
-        $view->generate(array('errorMsg' => $exception->getMessage()));
+        if (Configuration::getSetting('live')) {
+            date_default_timezone_set('Europe/Paris');
+            $msg = "*******************" . "\n" . "** " . date('Y-m-d H:i:s') . "\n";
+            $msg .= "*******************" . "\n";
+            $msg .= "** Error in the script '" . $exception->getFile() . "' on line " . $exception->getLine() . " :" . "\n";
+            $msg .= $exception->getMessage() . "\n";
+            $msg .= "\n" . "----------------------------------------------------------------------------" . "\n";
+            error_log($msg, 3, "logs/jforterr.log");
+            $view->generate(array('errorMsg' => 'Si celle-ci se reproduit, veuillez contacter l\'administrateur du site.'));
+        } else {
+            $msg = "An error has occured in the script <span class=\"error\">" . $exception->getFile() . "</span> on";
+            $msg .= " line " . $exception->getLine() . " :<br /><pre>";
+            $msg .= $exception->getMessage() . "</pre>";
+            $view->generate(array('errorMsg' => $msg));
+        }
     }
 
     //Parse parameters
@@ -78,7 +90,7 @@ class Router {
             }
             return $endParams;
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage());
+            throw new Exception($ex);
         }
     }
 
