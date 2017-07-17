@@ -1,7 +1,7 @@
 <?php $this->title = "JF - Connexion admin"; ?>
 <section id="intro">
     <div class="container">
-        <p>Veuillez vous connecter.</p>
+        <h1>Veuillez vous connecter.</h1>
     </div>
 </section>
 <article>

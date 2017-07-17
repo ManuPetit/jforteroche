@@ -234,9 +234,9 @@ class Utilisateur extends Model {
                 $salt = $this->generateSalt();
                 //create the new password hash
                 $hash = $this->makePassword($pass, $salt);
-                //we save the password
-                $this->saveNewPassword($hash, $salt, $email);
                 if ($this->sendPasswordMail($pass, $email)) {
+                    //we save the password
+                    $this->saveNewPassword($hash, $salt, $email);
                     $msg = "<p>Un email vous a été envoyé avec votre nouveau mot de passe.</p>";
                     $msg .= "<p>Connectez-vous à l'interface administrative avec ce nouveau "
                             . "mot de passe, afin de le changer pour un qui vous convient mieux.";
