@@ -26,7 +26,7 @@ class Chapitre extends Model {
         return $this->title;
     }
 
-    public function setTitle( $title) {
+    public function setTitle($title) {
         $this->title = $title;
     }
 
@@ -34,7 +34,7 @@ class Chapitre extends Model {
         return $this->content;
     }
 
-    public function setContent( $content) {
+    public function setContent($content) {
         $this->content = $content;
     }
 
@@ -42,7 +42,7 @@ class Chapitre extends Model {
         return $this->id_user;
     }
 
-    public function setIdUser( $idUser) {
+    public function setIdUser($idUser) {
         $this->id_user = $idUser;
     }
 
@@ -55,7 +55,7 @@ class Chapitre extends Model {
         return $this->id_state;
     }
 
-    public function setIdState( $idState) {
+    public function setIdState($idState) {
         $this->id_state = $idState;
     }
 
@@ -75,7 +75,7 @@ class Chapitre extends Model {
      * @param int $idChapter    the ID of the chapter
      * @throws Exception
      */
-    public function getPublishedChapter( $idChapter) {
+    public function getPublishedChapter($idChapter) {
         $sql = "SELECT chapters.id as id, title, content, chapters.id_user as id_user, CONCAT(name, ' ', surname) as user_name,"
                 . "  id_state, date_last_modif "
                 . "FROM chapters INNER JOIN users ON chapters.id_user = users.id"
@@ -102,7 +102,7 @@ class Chapitre extends Model {
      * @param int $idChapter    the ID of the chapter
      * @throws Exception
      */
-    public function getChapter( $idChapter) {
+    public function getChapter($idChapter) {
         $sql = "SELECT chapters.id as id, title, content, chapters.id_user as id_user, CONCAT(name, ' ', surname) as user_name,"
                 . "  id_state, date_last_modif "
                 . "FROM chapters INNER JOIN users ON chapters.id_user = users.id"
@@ -122,7 +122,7 @@ class Chapitre extends Model {
             throw new Exception("Chapitre invalide...");
         }
     }
-    
+
     /**
      * Method to retrieve the last chapters published (3 max)
      * 
@@ -159,10 +159,11 @@ class Chapitre extends Model {
      * 
      * @return int  the id of the chapter or null
      */
-    public function getFirstPublishedChapterId(){
+    public function getFirstPublishedChapterId() {
         $sql = "SELECT id FROM chapters WHERE id_state = 2 ORDER BY id LIMIT 1";
         return $this->GetOne($sql);
     }
+
     /**
      * Method to retrieve the index of published chapters
      * 
@@ -178,7 +179,7 @@ class Chapitre extends Model {
             throw new Exception('Aucun chapitre créé...');
         }
     }
-    
+
     /**
      * Retrieve the list of all chapters(except deleted one)
      * 
@@ -186,20 +187,20 @@ class Chapitre extends Model {
      * @return array    this is an array of 'Chapitre' object
      *         null     if no chapters have been found
      */
-    public function getAllChapters( $idState){
+    public function getAllChapters($idState) {
         if ($idState == 1) {
             $inner = 'id_state = 1';
-        }elseif ($idState == 2) {
+        } elseif ($idState == 2) {
             $inner = 'id_state = 2';
-        }else {
+        } else {
             $inner = 'id_state = 1 OR id_state = 2';
         }
         $sql = "SELECT id, title, id_state, date_last_modif FROM chapters "
                 . "WHERE $inner ORDER BY id";
         $rows = $this->getAll($sql);
-        if (!empty($rows)){
+        if (!empty($rows)) {
             $chapters = array();
-            foreach ($rows as $row){
+            foreach ($rows as $row) {
                 $chapter = new Chapitre();
                 $chapter->id = $row['id'];
                 $chapter->title = $row['title'];
@@ -210,32 +211,31 @@ class Chapitre extends Model {
             return $chapters;
         } else {
             return null;
-        }        
+        }
     }
-    
+
     /**
      * Method to calculate the number of differents type of
      * chapters in the DB
      * 
      * @return array    An array with the chapters counts
      */
-    public function getTotalChapterDetail(){
+    public function getTotalChapterDetail() {
         $chapters = array();
         $chapters['total'] = $this->getNumberChapter('all');
         $chapters['edit'] = $this->getNumberChapter('edit');
         $chapters['publish'] = $this->getNumberChapter('publish');
         return $chapters;
     }
-    
+
     /**
      * Gets the total number of chapter
      * 
      * @return int  The number of chapter returned
      */
-    public function getTotalChapter(){
+    public function getTotalChapter() {
         return $this->getNumberChapter('all');
     }
-
 
     /**
      * Method that counts the number of chapter for a given state
@@ -243,7 +243,7 @@ class Chapitre extends Model {
      * @param string $type  The type of chapters (all, edit or published)
      * @return int          The number of the chapters in this category
      */
-    private function getNumberChapter( $type) {
+    private function getNumberChapter($type) {
         if ($type == 'edit') {
             $inner = 'id_state = 1';
         } elseif ($type == 'publish') {
@@ -251,10 +251,10 @@ class Chapitre extends Model {
         } else {
             $inner = 'id_state = 1 OR id_state = 2';
         }
-        $sql = "SELECT COUNT(*) FROM chapters WHERE " .$inner;
+        $sql = "SELECT COUNT(*) FROM chapters WHERE " . $inner;
         return $this->GetOne($sql);
     }
-    
+
     /**
      * Method to add a new chapter in the database
      * 
@@ -263,7 +263,7 @@ class Chapitre extends Model {
      * @param int $state        The state of the chapter
      * @param int $user         The user ID of the user who created the chapter
      */
-    public function saveNewChapter( $title,  $content,  $state,  $user){
+    public function saveNewChapter($title, $content, $state, $user) {
         $sql = "INSERT INTO chapters (title, content, id_user, id_state, date_last_modif)"
                 . " VALUES (:title, :content, :id_user, :id_state, NOW())";
         $params = array(
@@ -274,14 +274,14 @@ class Chapitre extends Model {
         );
         $this->execute($sql, $params);
     }
-    
+
     /**
      * Method to update the state of a chapter
      * 
      * @param int $id       The ID of the chapter being updated
      * @param int $state    The state of the chapter
      */
-    public function updateState( $id,  $state){
+    public function updateState($id, $state) {
         $sql = "UPDATE chapters SET id_state = :id_state, date_last_modif = NOW() WHERE id = :id";
         $params = array(
             ':id_state' => $state,
@@ -298,7 +298,7 @@ class Chapitre extends Model {
      * @param string $content   The content of the chapter
      * @param int $state        the state of the chapter
      */
-    public function updateChapter( $id,  $title,  $content,  $state){
+    public function updateChapter($id, $title, $content, $state) {
         $sql = "UPDATE chapters SET title = :title, content = :content, id_state = :state,"
                 . " date_last_modif = NOW() WHERE id = :id";
         $params = array(
@@ -309,4 +309,5 @@ class Chapitre extends Model {
         );
         $this->execute($sql, $params);
     }
+
 }

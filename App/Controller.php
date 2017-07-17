@@ -48,11 +48,11 @@ abstract class Controller {
             $webRoot = Configuration::getSetting("webRoot", "/");
             if (isset($id) && $id != '') {
                 //redirects to the URL webRoot/controller/action/id
-                $location =  $webRoot . $controller . "/" . $action . "/" . $id;
+                $location = $webRoot . $controller . "/" . $action . "/" . $id;
             } else {
                 //redirects to the URL webRoot/controller/action
                 $location = $webRoot . $controller . "/" . $action;
-            } 
+            }
             header("Location: " . $location);
             exit();
         } catch (Exception $ex) {

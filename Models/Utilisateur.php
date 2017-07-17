@@ -355,7 +355,7 @@ class Utilisateur extends Model {
      * @param string $email     The user email
      * @return boolean
      */
-    private function sendPasswordMail($password, $email) {   
+    private function sendPasswordMail($password, $email) {
         $message = '<p>Un nouveau mot de passe à été généré :<br />';
         $message .= $password . '</p>';
         $message .= '<p>Veuillez vous connecter à <a href="http://jforteroche.iiidees.com/connexion">l\'interface administrative</a> avec ce nouveau mot de passe.<br />';

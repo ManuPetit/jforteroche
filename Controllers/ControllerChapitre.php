@@ -31,7 +31,7 @@ class ControllerChapitre extends Controller {
         $forms = new Forms();
         //check if we have at least one chapter published
         $idChapter = $this->chapter->getFirstPublishedChapterId();
-        //check if we have an idea passed by the request
+        //check if we have an id passed by the request
         //and override idChapter
         if ($this->request->parameterExists('id')) {
             $idChapter = $this->request->getParameter('id');

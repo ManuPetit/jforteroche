@@ -104,7 +104,6 @@ class ControllerAdmin extends ControllerSecurity {
             }
         }
         //retrieve the start of the query
-//        $allComments = $this->comment->getAllComments($option);
         $allComments = $this->comment->getAllComments($option, $start, $display);
         $this->generateView(array(
             'adminMenu' => $adminMenu,
@@ -379,14 +378,14 @@ class ControllerAdmin extends ControllerSecurity {
                 'adminMenu' => $adminMenu,
                 'user' => $this->user,
                 'message' => $message
-            ), 'profil');
+                    ), 'profil');
         }
     }
-    
+
     /**
      * method to update password
      */
-    public function motdepasse(){
+    public function motdepasse() {
         $passOne = ($this->request->parameterExists('passone')) ? $this->request->getParameter('passone') : '';
         $passTwo = ($this->request->parameterExists('passtwo')) ? $this->request->getParameter('passtwo') : '';
         $this->user->getUser($this->request->getSession()->getParameter('idUser'));
@@ -396,7 +395,7 @@ class ControllerAdmin extends ControllerSecurity {
         $validation->isPasswordMatched('passtwo', $passOne, $passTwo);
         //retrieve the errors
         $errors = $validation->getErrors();
-        if (isset($errors) && $errors != null){
+        if (isset($errors) && $errors != null) {
             $value['email'] = $this->user->getEmail();
             $value['passone'] = $passOne;
             $value['passtwo'] = $passTwo;
@@ -409,7 +408,7 @@ class ControllerAdmin extends ControllerSecurity {
                 'value' => $value,
                 'errors' => $errors
                     ), 'changer');
-        }else{
+        } else {
             $this->user->updatePassword($passOne);
             $message = 'Votre mot de passe a bien été mis à jour.';
             $adminMenu = Menus::createAdminMenu('profil');
@@ -417,7 +416,7 @@ class ControllerAdmin extends ControllerSecurity {
                 'adminMenu' => $adminMenu,
                 'user' => $this->user,
                 'message' => $message
-            ), 'profil');
+                    ), 'profil');
         }
     }
 

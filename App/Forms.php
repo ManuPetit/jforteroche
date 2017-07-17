@@ -59,6 +59,7 @@ class Forms {
     public function createInputEmail($name, $label, $required = true, $placeholder = null, $value = null, $errors = null) {
         echo $this->createGenericInput($name, $label, 'email', $required, $placeholder, $value, $errors);
     }
+
     /**
      * Method to create a password input to be used in a view. 
      * It calls a generic function to do the work
@@ -354,13 +355,13 @@ class Forms {
                 $currentPage = ($start / $display) + 1;
                 //not the first page so we make a previous link
                 if ($currentPage != 1) {
-                    $html .= '<a href="admin/messages/0/start/' . ($start - $display) . '/pages/' . $pages . '/approval/' . $option . '/prevoption/' .$prevoption;
+                    $html .= '<a href="admin/messages/0/start/' . ($start - $display) . '/pages/' . $pages . '/approval/' . $option . '/prevoption/' . $prevoption;
                     $html .= '" title="Allez à la page précédente">Préc.</a>';
                 }
                 //make all the numbered pages
                 for ($i = 1; $i <= $pages; $i++) {
                     if ($i != $currentPage) {
-                        $html .= '<a href="admin/messages/0/start/' . ($display * ($i - 1)) . '/pages/' . $pages . '/approval/' . $option. '/prevoption/' .$prevoption;
+                        $html .= '<a href="admin/messages/0/start/' . ($display * ($i - 1)) . '/pages/' . $pages . '/approval/' . $option . '/prevoption/' . $prevoption;
                         $html .= '" title="Allez à la page ' . $i . '">' . $i . '</a>';
                     } else {
                         $html .= '<span>' . $i . '</span>';
@@ -368,7 +369,7 @@ class Forms {
                 }
                 //make the last link if not on the last page
                 if ($currentPage != $pages) {
-                    $html .= '<a href="admin/messages/0/start/' . ($start + $display) . '/pages/' . $pages . '/approval/' . $option. '/prevoption/' .$prevoption;
+                    $html .= '<a href="admin/messages/0/start/' . ($start + $display) . '/pages/' . $pages . '/approval/' . $option . '/prevoption/' . $prevoption;
                     $html .= '" title="Allez à la page suivante">Suiv.</a>';
                 }
                 $html .= '</td></tr>';

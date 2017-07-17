@@ -118,20 +118,20 @@ class Validation {
             $this->errors['err_' . $inputName] = "adresse email non valide";
         }
     }
-    
+
     /**
      * Method to check a password meets the minimum requirements
      * 
      * @param string $inputName The name of the input the value comes from
      * @param string $input     the value to check
      */
-    public function isPasswordChecked($inputName, $input){
+    public function isPasswordChecked($inputName, $input) {
         $input = trim($input);
-        if (!preg_match('#^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,30}$#', $input)){
+        if (!preg_match('#^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,30}$#', $input)) {
             $this->errors['err_' . $inputName] = "le mot de passe doit contenir entre 8 et 30 caractères (chiffres, lettres minuscules et majuscules)";
         }
     }
-    
+
     /**
      * Method to check the two new password are the same
      * 
@@ -139,10 +139,10 @@ class Validation {
      * @param string $passOne   the first value to check
      * @param string $passTwo   the second value to check
      */
-    public function isPasswordMatched($inputName, $passOne, $passTwo){
+    public function isPasswordMatched($inputName, $passOne, $passTwo) {
         $passOne = trim($passOne);
         $passTwo = trim($passTwo);
-        if ($passOne != $passTwo){
+        if ($passOne != $passTwo) {
             $this->errors['err_' . $inputName] = "le mot de passe ne correspond pas à la confirmation du mot de passe";
         }
     }

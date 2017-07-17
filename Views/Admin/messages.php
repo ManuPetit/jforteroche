@@ -42,7 +42,7 @@
                                 <input type="hidden" name="start" value="<?php echo $start; ?>" />
                                 <input type="hidden" name="pages" value="<?php echo $pages; ?>" />
                                 <input type="hidden" name="display" value="<?php echo $display; ?>" />
-                                
+
                             </form>
                         </td>
                     </tr>

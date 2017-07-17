@@ -19,14 +19,14 @@
                 <h2>Choisissez un épisode à modifier :</h2>
                 <form action="admin/modifier" method="post">
                     <p>
-                    <label for="id">Les épisodes :</label><br />
-                    <select id="id" name="id">
-                        <?php foreach ($chapters as $chapter): ?>
-                            <option value="<?php echo $chapter->getId(); ?>">
-                                <?php echo $chapter->getTitle(); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                        <label for="id">Les épisodes :</label><br />
+                        <select id="id" name="id">
+                            <?php foreach ($chapters as $chapter): ?>
+                                <option value="<?php echo $chapter->getId(); ?>">
+                                    <?php echo $chapter->getTitle(); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                     </p>
                     <button type="submit" name="submit" class="button-admin">Modifier</button>
                 </form>

@@ -106,12 +106,12 @@ class ControllerConnexion extends Controller {
                 'forms' => $forms,
                 'value' => $value,
                 'errors' => $errors
-            ), 'link');
+                    ), 'link');
         } else {
             $message = $this->user->generateNewPassword($mail);
             $this->generateView(array(
                 'message' => $message
-            ), 'mailing');
+                    ), 'mailing');
         }
     }
 
