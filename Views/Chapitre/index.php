@@ -56,9 +56,11 @@
                                 <p><?php echo $this->sanitizeHtml($comment->getComment()); ?></p>
                                 <p class="comment-icon">
                                     <?php if ($comment->getLevel() != 2): ?>
-                                        <a id="icon-response<?php echo $comment->getId(); ?>" onclick="answerComment('<?php echo $comment->getId(); ?>', '<?php echo $chapter->getId(); ?>')" title="Cliquez ici pour répondre à ce commentaire"><i class="fa fa-comments" aria-hidden="true"></i></a>
+                                        <a id="icon-response<?php echo $comment->getId(); ?>" onclick="answerComment('<?php echo $comment->getId(); ?>', '<?php echo $chapter->getId(); ?>')" 
+                                           title="Cliquez ici pour répondre à ce commentaire"><i class="fa fa-comments" aria-hidden="true"></i></a>
                                     <?php endif; ?>
-                                    <a href="chapitre/signaler/<?php echo $comment->getId(); ?>" title="Signaler ce commentaire à l'administrateur du site"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></a>
+                                    <a href="chapitre/signaler/<?php echo $comment->getId(); ?>" title="Signaler ce commentaire à l'administrateur du site">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></a>
                                 </p>
                                 <p id="frm<?php echo $comment->getId(); ?>"></p>
                             </div>

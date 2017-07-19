@@ -6,14 +6,14 @@
 class Validation {
 
     //          Private property
-    private $errors = [];
+    private $errors;
 
     /**
      * This class help for the validation of the input. It set errors
      * in an array which will be used later if it exists
      */
     public function __construct() {
-        unset($this->errors);
+        $this->errors = array();
     }
 
     public function getErrors() {
