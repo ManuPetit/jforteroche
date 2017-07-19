@@ -113,9 +113,22 @@ class ControllerChapitre extends Controller {
      * may be linked to it)
      */
     public function signaler() {
+        $forms = new Forms();
         $idComment = $this->request->getParameter("id");
         $idChapter = $this->comment->signalComment($idComment);
-        $this->redirect("chapitre", "index", $idChapter);
+        $message = "Ce commentaire a été signalé à l'administrateur du site et restera masqué jusqu'à sa nouvelle validation.";
+        $this->chapter->getPublishedChapter($idChapter);
+        $menu = $this->chapter->getChapterList();
+        $comments = $this->comment->getApprovedCommentsChapter($idChapter);
+        $this->generateView(array(
+            'menu' => $menu,
+            'chapter' => $this->chapter,
+            'comments' => $comments,
+            'forms' => $forms,
+            'value' => null,
+            'errors' => null,
+            'message' => $message
+        ), 'index');
     }
 
     /**
