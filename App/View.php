@@ -4,9 +4,7 @@ require_once 'Configuration.php';
 require_once 'Menus.php';
 
 /**
- * 
- *                                                  Main MENU dans generate
- * 
+ *              Class to generate Views
  */
 class View {
 
