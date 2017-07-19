@@ -184,14 +184,18 @@ header a:hover {
 #boxes {
     margin-top: 20px;
 }
+#boxes div.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;    
+}
 #boxes h1 {
     font-size: 2em;
     text-align: center;
 }
 #boxes .box {
     width: 30%;
-    float: left;
-    padding: 15px;
+    padding: 20px;
 }
 #boxes h3 {
     letter-spacing: 0.05em;
@@ -453,6 +457,9 @@ footer {
         float: none;
         text-align: center;
         width: 100%;
+    }
+    #boxes div.container {
+        flex-direction: column;
     }
     .photoid {
         float: none;

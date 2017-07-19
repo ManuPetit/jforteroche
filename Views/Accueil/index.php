@@ -12,9 +12,9 @@
     </div>
 </section>
 <section id="boxes">
-    <div class="container">
-        <?php if (isset($lastChapters)): ?>
-            <h1>Les derniers chapitres publiés</h1>
+    <?php if (isset($lastChapters)): ?>
+        <h1>Les derniers chapitres publiés</h1>
+        <div class="container">
             <?php foreach ($lastChapters as $chapter): ?>
                 <div class="box">
                     <h3><?php echo $this->sanitizeHtml($chapter->getTitle()); ?></h3>
@@ -27,10 +27,10 @@
                     </p>
                 </div>
             <?php endforeach; ?>
-        <?php else: ?>
-            <h1>Aucun chapitre publié.</h1>
-            <h3>Revenez bientôt pour découvrir le livre....</h3>
-        <?php endif; ?>
-    </div>
+        </div>
+    <?php else: ?>
+        <h1>Aucun chapitre publié.</h1>
+        <h3>Revenez bientôt pour découvrir le livre....</h3>
+    <?php endif; ?>
 </section>
 
