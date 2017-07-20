@@ -92,26 +92,30 @@ class ControllerConnexion extends Controller {
      * Method to send a link to the new password generating system
      */
     public function mail() {
-        $mail = ($this->request->parameterExists('email')) ? $this->request->getParameter('email') : '';
-        //validate the email
-        $validation = new Validation();
-        $validation->isRequired('email', $mail);
-        $validation->isValidEmail('email', $mail);
-        $errors = $validation->getErrors();
-        if (isset($errors) && $errors != '') {
-            //we don't have a valid email. show the form again
-            $forms = new Forms();
-            $value['email'] = $mail;
-            $this->generateView(array(
-                'forms' => $forms,
-                'value' => $value,
-                'errors' => $errors
-                    ), 'link');
-        } else {
-            $message = $this->user->generateNewPassword($mail);
-            $this->generateView(array(
-                'message' => $message
-                    ), 'mailing');
+        try {
+            $mail = ($this->request->parameterExists('email')) ? $this->request->getParameter('email') : '';
+            //validate the email
+            $validation = new Validation();
+            $validation->isRequired('email', $mail);
+            $validation->isValidEmail('email', $mail);
+            $errors = $validation->getErrors();
+            if (isset($errors) && $errors != null) {
+                //we don't have a valid email. show the form again
+                $forms = new Forms();
+                $value['email'] = $mail;
+                $this->generateView(array(
+                    'forms' => $forms,
+                    'value' => $value,
+                    'errors' => $errors
+                        ), 'link');
+            } else {
+                $message = $this->user->generateNewPassword($mail);
+                $this->generateView(array(
+                    'message' => $message
+                        ), 'mailing');
+            }
+        } catch (Exception $ex) {
+            throw new Exception($ex);
         }
     }
 
