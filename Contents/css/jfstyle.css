@@ -196,6 +196,7 @@ header a:hover {
 #boxes .box {
     width: 30%;
     padding: 20px;
+    text-align: justify;
 }
 #boxes h3 {
     letter-spacing: 0.05em;
@@ -449,17 +450,23 @@ footer {
     header #branding,
     header nav,
     header nav li,
-    #boxes .box,
     #main-col .cols,
-    article#main-col,
     #main-col table,
     aside#sidebar {
         float: none;
         text-align: center;
         width: 100%;
     }
+    article#main-col {
+        float: none;
+        width: 100%;
+        text-align: justify;
+    }
     #boxes div.container {
         flex-direction: column;
+    }
+    #boxes .box {
+        width: 90%;
     }
     .photoid {
         float: none;
