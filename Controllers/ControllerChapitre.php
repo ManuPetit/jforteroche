@@ -116,7 +116,7 @@ class ControllerChapitre extends Controller {
         $forms = new Forms();
         $idComment = $this->request->getParameter("id");
         $idChapter = $this->comment->signalComment($idComment);
-        $message = "Ce commentaire a été signalé à l'administrateur du site et restera masqué jusqu'à sa nouvelle validation.";
+        $message = "Ce commentaire a été signalé et sera de nouveau validé par l'administrateur du site.";
         $this->chapter->getPublishedChapter($idChapter);
         $menu = $this->chapter->getChapterList();
         $comments = $this->comment->getApprovedCommentsChapter($idChapter);

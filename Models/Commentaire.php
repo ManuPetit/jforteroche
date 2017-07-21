@@ -91,7 +91,7 @@ class Commentaire extends Model {
      */
     public function getApprovedCommentsChapter($idChapter) {
         $sql = "SELECT id, id_chapter, id_parent, user_name, comment, id_approval, date_written FROM comments "
-                . "WHERE id_chapter = :idChapter AND id_approval = 2 ORDER BY date_written";
+                . "WHERE id_chapter = :idChapter AND id_approval = 2 OR id_approval = 3 ORDER BY date_written";
         $params = array(':idChapter' => $idChapter);
         $rows = $this->getAll($sql, $params);
         if (!empty($rows)) {
